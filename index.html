@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Options</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #fff;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .option {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+            position: relative;
+        }
+        .most-popular {
+            border: 2px solid #ff4d79;
+            position: relative;
+        }
+        .most-popular::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #ff4d79;
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+        .discount {
+            background: #ff4d79;
+            color: white;
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: gray;
+            font-size: 14px;
+        }
+        .selection {
+            margin-top: 10px;
+            display: none;
+        }
+        .show-selection .selection {
+            display: block;
+        }
+        .free-delivery {
+            color: red;
+            font-size: 14px;
+        }
+        .cart-button {
+            background: #ff4d79;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .powered {
+            font-size: 12px;
+            color: gray;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="option">
+            <input type="radio" name="unit" onclick="toggleSelection(0)"> 1 Unit <span class="discount">10% Off</span>
+            <div class="price">$10.00 USD <span class="old-price">$24.00 USD</span></div>
+        </div>
+
+        <div class="option most-popular" onclick="toggleSelection(1)">
+            <input type="radio" name="unit"> 2 Unit <span class="discount">20% Off</span>
+            <div class="price">$18.00 USD <span class="old-price">$24.00 USD</span></div>
+            <div class="selection">
+                <label>Size</label>
+                <select class="form-select" onchange="changeSize(this)">
+                    <option value="16px">S</option>
+                    <option value="20px">M</option>
+                    <option value="24px">L</option>
+                </select>
+                <label>Color</label>
+                <select class="form-select" onchange="changeColor(this)">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="red">Red</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="option">
+            <input type="radio" name="unit" onclick="toggleSelection(2)"> 3 Unit <span class="discount">30% Off</span>
+            <div class="price">$24.00 USD <span class="old-price">$24.00 USD</span></div>
+        </div>
+
+        <div class="free-delivery">Free Delivery</div>
+        <button class="cart-button">+ Add to Cart</button>
+        <div class="powered">@ Powered by Pumper</div>
+    </div>
+
+    <script>
+        function toggleSelection(index) {
+            let options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                if (i === index) {
+                    option.classList.add('show-selection');
+                } else {
+                    option.classList.remove('show-selection');
+                }
+            });
+        }
+
+        function changeColor(select) {
+            let color = select.value;
+            let optionBox = select.closest('.option');
+            optionBox.style.backgroundColor = color;
+        }
+
+        function changeSize(select) {
+            let size = select.value;
+            let optionBox = select.closest('.option');
+            optionBox.style.fontSize = size;
+        }
+    </script>
+</body>
+</html>
